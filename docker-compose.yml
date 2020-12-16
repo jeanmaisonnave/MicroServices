@@ -2,6 +2,7 @@ version: '3.5'
 
 volumes: 
   user-db-data:
+  product-db-data:
 
 networks: 
   esbay-network:
@@ -24,7 +25,7 @@ services:
     ports:
       - 8083:5000
     depends_on:
-      - user_db
+      - product_db
     restart: always
     networks:
       - esbay-network
@@ -32,6 +33,16 @@ services:
     image: mysql:5.7.22
     volumes:
       - user-db-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=user
+    restart: always
+    networks:
+      - esbay-network
+  product_db:
+    image: mysql:5.7.22
+    volumes:
+      - product-db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=test
       - MYSQL_DATABASE=user
