@@ -29,7 +29,6 @@ services:
     restart: always
     networks:
       - esbay-network
-      
   user_db:
     image: mysql:5.7.22
     volumes:
